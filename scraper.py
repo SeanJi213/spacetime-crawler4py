@@ -1,12 +1,9 @@
 import json
 import re
 from urllib.parse import *
-import lxml
 from bs4 import BeautifulSoup
 import requests
 from auxiliary import *
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 
 
 # Quoted works:
@@ -113,7 +110,12 @@ def filter_urls(urls):
 
 
 def tokenize(input_text):
-    return word_tokenize(input_text)
+    token_list = []
+    pattern = '^[a-zA-Z0-9\']+$'  # include the single quotation mark
+    for word in input_text.split():
+        if re.match(pattern, word):
+            token_list.append(word)
+    return token_list
 
 
 def get_link_dict(filtered_links):
@@ -170,7 +172,7 @@ def filter_words(url, resp):
         soup = BeautifulSoup(resp.raw_response.content, 'html.parser')
         input_text = soup.text
         word_tokens = tokenize(input_text)
-        stop_words = set(stopwords.words('english'))
+        stop_words = STOP_WORDS
         word_tokens_without_stopwords = [token for token in word_tokens if token not in stop_words]
 
         word_dict['url_list'][url] = len(word_tokens)
