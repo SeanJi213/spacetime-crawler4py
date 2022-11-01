@@ -6,6 +6,8 @@ SEED_URLS = {
     'today.uci.edu/department/information_computer_sciences'
 }
 
+POLITENESS = 0.5
+
 STOP_WORDS = {
     'a',
     'about',
