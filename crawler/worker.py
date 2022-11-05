@@ -35,7 +35,7 @@ class Worker(Thread):
                 self.frontier.add_url(scraped_url)
             self.frontier.mark_url_complete(tbd_url)
             time.sleep(self.config.time_delay)
-            if count_tbd_url % 1000 == 0:
+            if count_tbd_url % 100 == 0:
                 self.statistics.generate_report()
                 
         self.statistics.generate_report()
