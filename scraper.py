@@ -48,14 +48,11 @@ def scraper(url, resp, statistics):
             else:
                 statistics.word_frequency_map[word] += freq
 
-        words = [k for k, v in sorted_freqs]
         freqs = [v for k, v in sorted_freqs]
         total_weight = sum(freqs)
 
-        # avoid large pages with low information to be the longest page
-        if total_weight > statistics.most_weight:
-            statistics.most_weight = total_weight
-            statistics.longest_page_val = len(words)
+        if total_weight > statistics.longest_page_val:
+            statistics.longest_page_val = total_weight
             statistics.longest_page = url
 
         next_links = extract_next_links(url, resp)
