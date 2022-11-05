@@ -6,10 +6,6 @@ SEED_URLS = {
     'today.uci.edu/department/information_computer_sciences'
 }
 
-SIMHASH_LIST_30_PAGES = []
-
-HAMMING_DISTANCE = 3
-
 STOP_WORDS = {
     'a',
     'about',
